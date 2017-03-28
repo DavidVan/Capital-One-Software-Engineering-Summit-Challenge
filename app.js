@@ -14,5 +14,5 @@ app.set('view engine', 'ejs'); // Set view engine to use ejs.
 app.use('/', index); // Serve the index page.
 app.use('/about', about); // Serve the about page.
 
-app.listen(3000);
-console.log('Server running on port 3000');
+app.listen(1337);
+console.log('Server running on port 1337');
