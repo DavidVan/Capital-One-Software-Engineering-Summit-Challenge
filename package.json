@@ -1,0 +1,36 @@
+{
+  "name": "davidvan-submission",
+  "version": "1.0.0",
+  "description": "My submisison to Capital One's challenge.",
+  "main": "app.js",
+  "dependencies": {
+    "ejs": "^2.5.6",
+    "express": "^4.15.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidVan/Capital-One-Software-Engineering-Summit-Challenge.git"
+  },
+  "keywords": [
+    "capital",
+    "one",
+    "software",
+    "engineering",
+    "summit",
+    "challenge",
+    "submission",
+    "yelp",
+    "api"
+  ],
+  "author": "David Van",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DavidVan/Capital-One-Software-Engineering-Summit-Challenge/issues"
+  },
+  "homepage": "https://github.com/DavidVan/Capital-One-Software-Engineering-Summit-Challenge#readme"
+}
