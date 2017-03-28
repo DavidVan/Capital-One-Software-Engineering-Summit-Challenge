@@ -4,6 +4,6 @@ https://www.mindsumo.com/contests/restaurant-api
 
 How to start:
 
-'''
+```
 node app.js
-'''
+```
