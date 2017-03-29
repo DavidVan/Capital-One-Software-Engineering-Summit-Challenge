@@ -75,5 +75,7 @@ footer>p>span#red {
 }
 
 @media only screen and (max-width: 768px) {
-
+    #header {
+        text-align: center;
+    }
 }
