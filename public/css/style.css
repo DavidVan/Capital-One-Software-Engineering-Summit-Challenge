@@ -12,22 +12,12 @@ body {
 }
 
 a {
-    display: inline-block; /* Allows anchor tags to accept height */
-    font-size: 1.5rem; /* Set back to correct size */
-    text-shadow: .05em .05em .1em black;
-    margin: 0;
-    padding: .5em;
-    color: white;
     text-decoration: none;
-}
-
-a:visited {
     color: white;
-    text-shadow: .05em .05em .1em black;
 }
 
 a:hover {
-    background-color: #2196F3;
+    color: white;
 }
 
 p {
@@ -43,6 +33,25 @@ nav {
     font-size: 1.45rem; /* Needed for correct padding below. */
     text-align: center;
     background-color: #42A5F5;
+}
+
+nav>div>a {
+    display: inline-block; /* Allows anchor tags to accept height */
+    font-size: 1.5rem; /* Set back to correct size */
+    text-shadow: .05em .05em .1em black;
+    margin: 0;
+    padding: .5em;
+    color: white;
+    text-decoration: none;
+}
+
+nav>div>a:visited {
+    color: white;
+    text-shadow: .05em .05em .1em black;
+}
+
+nav>div>a:hover {
+    background-color: #2196F3;
 }
 
 footer {
