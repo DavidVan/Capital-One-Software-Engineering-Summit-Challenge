@@ -12,6 +12,7 @@ body {
 }
 
 a {
+    display: inline-block; /* Allows anchor tags to accept height */
     font-size: 1.5rem; /* Set back to correct size */
     text-shadow: .05em .05em .1em black;
     margin: 0;
@@ -42,8 +43,6 @@ nav {
     font-size: 1.45rem; /* Needed for correct padding below. */
     text-align: center;
     background-color: #42A5F5;
-    padding-top: .5em;
-    padding-bottom: .5em;
 }
 
 footer {
