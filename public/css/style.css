@@ -1,13 +1,15 @@
 html {
     font-size: 1rem;
-    position: relative;
-    min-height: 100%;
+    height: 100%;
 }
 
 body {
     font-family: Arial;
     font-size: 1rem;
-    margin: 0 0 3em;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
     padding: 0;
 }
 
@@ -54,11 +56,7 @@ nav>div>a:hover {
 }
 
 footer {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 3em;
+    padding-bottom: 1em;
     text-align: center;
     background-color: #42A5F5;
     color: white;
@@ -77,16 +75,33 @@ footer>p>span#red {
     padding: 1em;
 }
 
+.content {
+    flex: 1;
+    font-size: 1.25rem;
+}
+
 .removeSpacing {
     font-size: 0;
 }
 
-@media only screen and (max-width: 540px) {
+@media only screen and (max-width: 1280px) {
+    #header {
+        font-size: 6rem;
+    }
+
     nav>div>a {
-        font-size: 2rem;
+        font-size: 3rem;
+    }
+
+    footer {
+        padding-bottom: 2em;
     }
 
     footer>p {
+        font-size: 2rem;
+    }
+
+    .content {
         font-size: 2rem;
     }
 
