@@ -32,6 +32,7 @@ footer>p.addMargin {
 }
 
 nav {
+    box-shadow: 0em .25em 2em gray;
     text-align: center;
     background-color: #42A5F5;
 }
@@ -63,11 +64,16 @@ footer {
     color: white;
 }
 
+footer>p {
+    font-size: 1rem;
+}
+
 footer>p>span#red {
     color: red;
 }
 
 #header {
+    z-index: 1; /* We don't wnat shadows from navbar on header */
     font-size: 4rem;
     color: white;
     text-shadow: .05em .05em .1em black;
@@ -78,14 +84,14 @@ footer>p>span#red {
 
 .content {
     flex: 1;
-    font-size: 1.25rem;
+    font-size: 1rem;
 }
 
 .removeSpacing {
     font-size: 0;
 }
 
-@media only screen and (max-width: 1280px) {
+@media only screen and (max-width: 980px) { /* Nexus 6P; other mobile devices */
     #header {
         font-size: 6rem;
     }
@@ -108,5 +114,49 @@ footer>p>span#red {
 
     #header {
         text-align: center;
+    }
+}
+
+@media only screen and (min-width: 981px) and (max-width: 1024px) { /* Small Desktop Resolution */
+    #header {
+        font-size: 2rem;
+    }
+
+    nav>div>a {
+        font-size: .75rem;
+    }
+
+    footer {
+        padding-bottom: .75em;
+    }
+
+    footer>p {
+        font-size: .75rem;
+    }
+
+    .content {
+        font-size: .75rem;
+    }
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1280px) { /* Small to Medium Desktop Resolution */
+    #header {
+        font-size: 3rem;
+    }
+
+    nav>div>a {
+        font-size: 1.25rem;
+    }
+
+    footer {
+        padding-bottom: 1em;
+    }
+
+    footer>p {
+        font-size: 1.25rem;
+    }
+
+    .content {
+        font-size: 1.25rem;
     }
 }
