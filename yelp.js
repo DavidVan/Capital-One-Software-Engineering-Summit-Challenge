@@ -10,7 +10,8 @@ var credentials = {
     },
     auth: {
         tokenHost: 'https://api.yelp.com',
-        tokenPath: '/oauth2/token'
+        tokenPath: '/oauth2/token',
+        revokePath: '/oauth2/revoke'
     }
 };
 
