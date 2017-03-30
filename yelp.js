@@ -1,8 +1,9 @@
 var fs = require('fs');
+var path = require('path');
 var https = require('https');
 
-var yelpClientID = fs.readFileSync('YelpClientID', 'utf8');
-var yelpClientSecret = fs.readFileSync('YelpClientSecret', 'utf8');
+var yelpClientID = fs.readFileSync(path.join(__dirname, 'YelpClientID'), 'utf8');
+var yelpClientSecret = fs.readFileSync(path.join(__dirname, 'YelpClientSecret'), 'utf8');
 
 var postString = 'grant_type=' + 'client_credentials' +
                  '&client_id=' + yelpClientID +
