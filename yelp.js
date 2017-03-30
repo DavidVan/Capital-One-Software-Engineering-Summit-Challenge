@@ -1,29 +1,41 @@
 var fs = require('fs');
+var https = require('https');
 
 var yelpClientID = fs.readFileSync('YelpClientID', 'utf8');
 var yelpClientSecret = fs.readFileSync('YelpClientSecret', 'utf8');
 
-var credentials = {
-    client: {
-        id: yelpClientID,
-        secret: yelpClientSecret
-    },
-    auth: {
-        tokenHost: 'https://api.yelp.com',
-        tokenPath: '/oauth2/token',
-        revokePath: '/oauth2/revoke'
+var postString = 'grant_type=' + 'client_credentials' +
+                 '&client_id=' + yelpClientID +
+                 '&client_secret=' + yelpClientSecret;
+var options = {
+    hostname: 'api.yelp.com',
+    port: 443,
+    path: '/oauth2/token',
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': Buffer.byteLength(postString)
     }
-};
+}
 
-var oauth2 = require('simple-oauth2').create(credentials);
-var tokenConfig = {};
+var getAuth = function(callback) {
+    var req = https.request(options, function(res) {
+        res.setEncoding('utf8');
+        var json = [];
+        res.on('data', function (chunk) {
+            json.push(chunk);
+        });
+        res.on('end', function() {
+            callback(JSON.parse(json.join('')));
+        });
+    });
+
+    req.write(postString);
+    req.end();
+}
 
 module.exports.getToken = function(callback) {
-    oauth2.clientCredentials.getToken(tokenConfig, function(error, result) {
-        if (error) {
-            return console.log('Access Token Error', error.message);
-        }
-
-        callback(oauth2.accessToken.create(result).token.access_token); // Return the token
-    });
+    getAuth(function(auth) {
+        callback(auth.access_token); // Return the token for use
+    })
 };
