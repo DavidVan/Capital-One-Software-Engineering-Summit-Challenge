@@ -17,9 +17,14 @@
                     <input class="submitButton" type="submit" value="Search">
                 </form>
                 <div class="searchResults"></div>
+                <div class="map">
+                    <div id="googlemap"></div>
+                </div>
             </div>
         </div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=<%= GoogleAPIKey %>"></script>
         <script src="js/searchHelper.js"></script>
+        <script src="js/googleMaps.js"></script>
     </body>
     <footer>
         <% include partials/footer.ejs %>

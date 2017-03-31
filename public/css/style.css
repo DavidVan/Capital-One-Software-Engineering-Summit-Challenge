@@ -111,6 +111,15 @@ footer>p>a:hover {
     font-size: 1.5rem;
 }
 
+.search {
+    margin: 1em;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .form {
     display: inline-flex;
     width: 50%;
@@ -143,10 +152,8 @@ footer>p>a:hover {
 }
 
 .searchResults {
-    display: flex;
-    flex-direction: column;
     margin-top: 2em;
-    margin-bottom: 5em;
+    margin-bottom: 2em;
     margin-left: 10em;
     margin-right: 10em;
     padding: 0;
@@ -179,8 +186,17 @@ footer>p>a:hover {
 }
 
 .map {
-    border: dotted .25em red; /* DEBUG */
-    min-width: 50px; /* DEBUG */
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 900px;
+    height: 600px;
+}
+
+#googlemap {
+    width: 100%;
+    height: 100%;
 }
 
 .error {
