@@ -3,7 +3,7 @@ var fs = require('fs');
 var path = require('path');
 var router = express.Router();
 
-var googleAPIKey = fs.readFileSync(path.join(__dirname, '..\\GoogleAPIKey'), 'utf8').replace(/\r?\n|\r/g,''); // Remove line endings.
+var googleAPIKey = fs.readFileSync(path.join(__dirname, '../GoogleAPIKey'), 'utf8').replace(/\r?\n|\r/g,''); // Remove line endings.
 
 // Handle GET request for index page.
 router.get('/', function(req, res, next) {
