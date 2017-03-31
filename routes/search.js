@@ -5,15 +5,35 @@ var yelp = require('../yelp');
 
 // Handle GET request for search page.
 router.get('/', function(req, res, next) {
+    res.send('Nothing to see here!');
+});
+
+// Handle POST request for search page.
+router.post('/', function(req, res, next) {
+    var searchTerm = req.body.searchTerm;
+    var latitude = req.body.latitude;
+    var longitude = req.body.longitude;
+    if (searchTerm === '') {
+        return res.json({'error': 'No search term provided.'});
+    }
+    if (latitude === '') {
+        return res.json({'error': 'No latitude provided.'});
+    }
+    if (longitude === '') {
+        return res.json({'error': 'No longitude provided.'});
+    }
     yelp.getToken(function (token) {
         var getData = function(callback) {
             var options = {
                 hostname: 'api.yelp.com',
                 port: 443,
-                path: '/v3/businesses/search?term=delis&latitude=37.786882&longitude=-122.399972',
+                path: '/v3/businesses/search?' +
+                'term=' + searchTerm +
+                '&latitude=' + latitude +
+                '&longitude=' + longitude,
                 method: 'GET',
                 headers: {'Authorization': 'Bearer ' + token}
-            }
+            };
             https.request(options, function(res) {
                 res.setEncoding('utf8');
                 var json = [];
@@ -24,7 +44,7 @@ router.get('/', function(req, res, next) {
                     callback(json.join(''));
                 });
             }).end();
-        }
+        };
         getData(function(json) {
             res.json(JSON.parse(json));
         });

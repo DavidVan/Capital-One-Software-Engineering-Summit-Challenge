@@ -9,97 +9,17 @@
             <% include partials/navigationBar.ejs %>
         </nav>
         <div class="content">
-            <h1>Hello World!</h1>
-            <p>Test Page!</p>
-            <a href="https://api.yelp.com/v3/autocomplete?text=del&latitude=37.786882&longitude=-122.399972">Click Me</a>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!</p>
-            <p>Test Page!000</p>
+            <h1><span class="foodie">Foodie</span> is all about you!</h1>
+            <p class="intro">Search for your favorite type of food and we'll give you a random restaurant that you should try out!</p>
+            <div class="search">
+                <form class="form">
+                    <input class="searchBox" type="text" name="searchTerm" placeholder="Search...">
+                    <input class="submitButton" type="submit" value="Search">
+                </form>
+                <div class="searchResults"></div>
+            </div>
         </div>
+        <script src="js/searchHelper.js"></script>
     </body>
     <footer>
         <% include partials/footer.ejs %>

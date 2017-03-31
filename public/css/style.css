@@ -1,12 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
 @import url('https://fonts.googleapis.com/css?family=Lobster');
 
 html {
     font-size: 1rem;
     height: 100%;
+    min-width: 55em;
 }
 
 body {
-    font-family: Arial;
+    font-family: 'Quicksand', sans-serif;
     font-size: 1rem;
     min-height: 100%;
     display: flex;
@@ -96,14 +98,104 @@ footer>p>a:hover {
 .content {
     flex: 1;
     font-size: 1rem;
+    text-align: center;
 }
 
-.removeSpacing {
-    font-size: 0;
+.foodie {
+    font-family: 'Lobster', cursive;
+}
+
+.intro {
+    margin: 1em;
+    padding: 0;
+    font-size: 1.5rem;
+}
+
+.form {
+    display: inline-flex;
+    width: 50%;
+}
+
+.searchBox {
+    flex-grow: 100;
+    margin: 0;
+    padding: 1em;
+    border: .1em solid;
+    border-color: #2196F3;
+}
+
+.searchBox:focus {
+    outline: none;
+    border-color: #2196F3;
+    box-shadow: 0 0 1em #2196F3;
+}
+
+.submitButton {
+    color: white;
+    margin: 0;
+    padding: 1em;
+    border-left: 0em solid;
+    border-right: .1em solid;
+    border-top: .1em solid;
+    border-bottom: .1em solid;
+    border-color: #2196F3;
+    background-color: #42A5F5;
+}
+
+.searchResults {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2em;
+    margin-bottom: 5em;
+    margin-left: 10em;
+    margin-right: 10em;
+    padding: 0;
+}
+
+.business {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.businessImage {
+    width: 400px;
+    height: 400px;
+}
+
+.businessImage>img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.businessText {
+    margin-left: 10rem;
+}
+
+.businessText>img {
+    width: 250px;
+}
+
+.map {
+    border: dotted .25em red; /* DEBUG */
+    min-width: 50px; /* DEBUG */
+}
+
+.error {
+    font-weight: bold;
+    color: red;
 }
 
 @media only screen and (max-width: 980px) { /* Nexus 6P; other mobile devices */
+
+    html {
+        min-height: 85em; /* Keep footer at the bottom when keyboard is out */
+    }
+
     #header {
+        text-align: center;
         font-size: 10rem;
     }
 
@@ -123,8 +215,30 @@ footer>p>a:hover {
         font-size: 2rem;
     }
 
-    #header {
-        text-align: center;
+    .intro {
+        font-size: 1rem;
+    }
+
+    .form {
+        width: 90%;
+    }
+
+    .searchBox {
+        font-size: 2.5rem;
+    }
+
+    .submitButton {
+        font-size: 2.5rem;
+    }
+
+    .searchResults {
+        margin-top: 1em;
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+
+    .businessText {
+        margin-left: 3rem;
     }
 }
 
@@ -148,6 +262,11 @@ footer>p>a:hover {
     .content {
         font-size: .75rem;
     }
+    .searchResults {
+        margin-top: 2em;
+        margin-left: 5em;
+        margin-right: 5em;
+    }
 }
 
 @media only screen and (min-width: 1025px) and (max-width: 1280px) { /* Small to Medium Desktop Resolution */
@@ -169,5 +288,11 @@ footer>p>a:hover {
 
     .content {
         font-size: 1.25rem;
+    }
+
+    .searchResults {
+        margin-top: 2em;
+        margin-left: 5em;
+        margin-right: 5em;
     }
 }
