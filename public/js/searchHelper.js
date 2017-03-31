@@ -16,7 +16,6 @@ if (navigator.geolocation) {
     });
 }
 else {
-    console.log("what");
     getRoughLocation();
 }
 
@@ -74,10 +73,12 @@ searchBox.addEventListener('input', function(e) {
 
 searchButton.addEventListener('click', function(e) {
     e.preventDefault();
+    searchResultsArea.className = 'searchResults';
     if (searchBox.value.trim() === '') {
         return;
     }
     if (latitude === '' || longitude === '') {
+        console.log('Either it\'s taking a while to set coordinates (browser issue/implementation?), or there\'s no coordinates!')
         return;
     }
     if (searchTerm !== '' && previousSearchTerm !== '' && searchTerm === searchBox.value.trim() && searchTerm === previousSearchTerm) {
@@ -89,6 +90,7 @@ searchButton.addEventListener('click', function(e) {
         previousSearchTerm = searchTerm;
         searchButton.value = 'Again';
         searchResultsArea.innerHTML = '';
+        document.getElementsByClassName('map')[0].style.display = 'none';
         searchResultsArea.textContent = 'Loading Data...';
         var request = new XMLHttpRequest();
         request.open('POST', '/search', true);
@@ -119,10 +121,6 @@ searchButton.addEventListener('click', function(e) {
         request.send('searchTerm=' + searchTerm + '&latitude=' + latitude + '&longitude=' + longitude);
     }
 });
-
-function noResults() {
-
-}
 
 function makeBusiness() {
     var randomIndex = Math.floor(Math.random() * (data.businesses.length - 0)) + 0;
