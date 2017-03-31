@@ -8,7 +8,7 @@ How to deploy:
 git clone https://github.com/DavidVan/Capital-One-Software-Engineering-Summit-Challenge.git
 ```
 
-After cloning, create empty files named "YelpClientID", "YelpClientSecret", and "GoogleAPIKey".
+After cloning, create empty files named "YelpClientID", "YelpClientSecret", and "GoogleAPIKey". Place them in the root directory of the project (where the ".git" folder is).
 
 Inside file "YelpClientID", place the client ID that you received from Yelp.
 
