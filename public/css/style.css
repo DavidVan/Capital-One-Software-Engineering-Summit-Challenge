@@ -139,7 +139,7 @@ footer>p>a:hover {
     box-shadow: 0 0 1em #2196F3;
 }
 
-.submitButton {
+.searchButton {
     color: white;
     margin: 0;
     padding: 1em;
@@ -179,6 +179,11 @@ footer>p>a:hover {
 
 .businessText {
     margin-left: 10rem;
+}
+
+.price {
+    font-weight: bold;
+    color: green;
 }
 
 .businessText>img {
