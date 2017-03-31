@@ -12,7 +12,7 @@ router.post('/', function(req, res, next) {
     var getData = function(callback) {
         var options = {
             hostname: 'ip-api.com',
-            path: '/json',
+            path: '/json/' + (req.headers['x-forwarded-for'] || req.connection.remoteAddress),
             method: 'GET'
         };
         http.request(options, function(res) {
