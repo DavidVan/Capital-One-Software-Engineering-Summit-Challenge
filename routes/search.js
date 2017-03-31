@@ -23,14 +23,15 @@ router.post('/', function(req, res, next) {
         return res.json({'error': 'No longitude provided.'});
     }
     yelp.getToken(function (token) {
+        var searchPath = '/v3/businesses/search?' +
+                            'term=' + encodeURIComponent(searchTerm) +
+                            '&latitude=' + latitude +
+                            '&longitude=' + longitude;
         var getData = function(callback) {
             var options = {
                 hostname: 'api.yelp.com',
                 port: 443,
-                path: '/v3/businesses/search?' +
-                'term=' + searchTerm +
-                '&latitude=' + latitude +
-                '&longitude=' + longitude,
+                path: searchPath,
                 method: 'GET',
                 headers: {'Authorization': 'Bearer ' + token}
             };

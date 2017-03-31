@@ -78,7 +78,7 @@ searchButton.addEventListener('click', function(e) {
         return;
     }
     if (latitude === '' || longitude === '') {
-        console.log('Either it\'s taking a while to set coordinates (browser issue/implementation?), or there\'s no coordinates!')
+        console.log('Either it\'s taking a while to set coordinates (browser issue/implementation?), or there are no coordinates!')
         return;
     }
     if (searchTerm !== '' && previousSearchTerm !== '' && searchTerm === searchBox.value.trim() && searchTerm === previousSearchTerm) {
@@ -125,8 +125,8 @@ searchButton.addEventListener('click', function(e) {
 function makeBusiness() {
     var randomIndex = Math.floor(Math.random() * (data.businesses.length - 0)) + 0;
     var randomBusiness = data.businesses[randomIndex];
-    if (randomBusiness.id.trim() === previousBusiness && data.total !== 1) {
-        while (randomBusiness.id.trim() === previousBusiness) {
+    if ((randomBusiness.id.trim() === previousBusiness || randomBusiness.is_closed) && data.total !== 1) {
+        while (randomBusiness.id.trim() === previousBusiness || randomBusiness.is_closed) {
             randomIndex = Math.floor(Math.random() * (data.businesses.length - 0)) + 0;
             randomBusiness = data.businesses[randomIndex];
         }
@@ -153,7 +153,7 @@ function makeBusiness() {
                              '<p>' + address + '</p>' +
                              '<p>' + phone + '</p>' +
                              '<br>' +
-                             '<img src=' + ratingImage + ' alt=' + rating + ' stars' + '>' +
+                             '<img src="' + ratingImage + '" alt="' + rating + ' stars">' +
                              '<br>' +
                              '<p>Reviews: ' + numberOfReviews + '</p>' +
                              '<p>Price: <span class="price">' + price + '</span></p>' +
