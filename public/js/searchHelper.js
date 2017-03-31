@@ -25,7 +25,6 @@ searchButton.addEventListener('click', function(e) {
         return;
     }
     if (searchTerm !== '' && previousSearchTerm !== '' && searchTerm === searchBox.value.trim() && searchTerm === previousSearchTerm) {
-        console.log("reusing data");
         searchResultsArea.innerHTML = makeBusiness();
     }
     else {
@@ -40,7 +39,6 @@ searchButton.addEventListener('click', function(e) {
         request.onload = function() {
             if (request.status >= 200 && request.status < 400) {
                 data = JSON.parse(request.responseText);
-                console.log(request.responseText);
                 if (data.businesses.length === 0) {
                     searchResultsArea.innerHTML = '';
                     searchResultsArea.textContent = 'Sorry, no results.';
@@ -83,7 +81,6 @@ function makeBusiness() {
         ratingImage += 'half';
     }
     ratingImage += '.png';
-    console.log(ratingImage);
     return '<div class="business">' +
                '<div class="businessImage">' +
                    '<img src="' + randomBusiness.image_url + '"' + 'alt="' + randomBusiness.name + '">' +
