@@ -34,7 +34,7 @@ function getRoughLocation() {
 
         request.onload = function() {
             if (request.status >= 200 && request.status < 400) {
-                callback(request.responseText);
+                callback(JSON.parse(request.responseText));
             }
             else {
                 if (navigator.geolocation) {
