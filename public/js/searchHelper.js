@@ -2,7 +2,8 @@ var searchTerm = '';
 var latitude = '';
 var longitude = '';
 
-var addressForMap = '';
+var businessLatitude = 0;
+var businessLongitude = 0;
 
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -26,35 +27,39 @@ function getRoughLocation() {
     else {
         alert('Unable to get your location. Your browser doesn\'t support geolocation. Please upgrade your browser! For now, estimating location via IP address!');
     }
-    // Get rough location from user's IP.
-    var request = new XMLHttpRequest();
-    request.open('POST', '/getcoords', true);
+    var setRoughLocation = function(callback) {
+        // Get rough location from user's IP.
+        var request = new XMLHttpRequest();
+        request.open('POST', '/getcoords', true);
 
-    request.onload = function() {
-        if (request.status >= 200 && request.status < 400) {
-            var data = JSON.parse(request.responseText);
-            latitude = data.lat;
-            longitude = data.lon;
-        }
-        else {
-            if (navigator.geolocation) {
-                alert('Unable to get location from your IP address. Please check your connection and/or allow geolocation access and try again!');
+        request.onload = function() {
+            if (request.status >= 200 && request.status < 400) {
+                callback(request.responseText);
             }
             else {
-                alert('Unable to get location from your IP address. Please check your connection and try again! Again, your browser doesn\'t support geolocation. Please consider updating/upgrading your browser...');
+                if (navigator.geolocation) {
+                    alert('Unable to get location from your IP address. Please check your connection and/or allow geolocation access and try again!');
+                }
+                else {
+                    alert('Unable to get location from your IP address. Please check your connection and try again! Again, your browser doesn\'t support geolocation. Please consider updating/upgrading your browser...');
+                }
             }
         }
-    }
 
-    request.onerror = function() {
-        searchResultsArea.textContent = 'Location isn\'t set. You cannot use this application!';
-        searchResultsArea.className += ' error';
+        request.onerror = function() {
+            searchResultsArea.textContent = 'Location isn\'t set. You cannot use this application!';
+            searchResultsArea.className += ' error';
+        };
+
+        request.send();
     };
 
-    request.send();
+    setRoughLocation(function(dataFromIP) {
+        latitude = dataFromIP.lat;
+        longitude = dataFromIP.lon;
+    });
 }
 
-var data;
 var previousSearchTerm = '';
 var previousBusiness = '';
 
@@ -71,6 +76,27 @@ searchBox.addEventListener('input', function(e) {
     }
 });
 
+var getSearch = function(callback) {
+    var request = new XMLHttpRequest();
+    request.open('POST', '/search', true);
+    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    request.onload = function() {
+        if (request.status >= 200 && request.status < 400) {
+            callback(JSON.parse(request.responseText));
+        }
+        else {
+            searchResultsArea.textContent = 'Looks like there was a problem getting search results. Please try again.';
+            searchResultsArea.className += ' error';
+        }
+    };
+    request.onerror = function() {
+        searchResultsArea.textContent = 'Looks like there was a problem getting search results. Please try again.';
+        searchResultsArea.className += ' error';
+    };
+
+    request.send('searchTerm=' + searchTerm + '&latitude=' + latitude + '&longitude=' + longitude);
+};
+
 searchButton.addEventListener('click', function(e) {
     e.preventDefault();
     searchResultsArea.className = 'searchResults';
@@ -82,8 +108,10 @@ searchButton.addEventListener('click', function(e) {
         return;
     }
     if (searchTerm !== '' && previousSearchTerm !== '' && searchTerm === searchBox.value.trim() && searchTerm === previousSearchTerm) {
-        searchResultsArea.innerHTML = makeBusiness();
-        mapBusiness(addressForMap);
+        getSearch(function(data) {
+            searchResultsArea.innerHTML = makeBusiness(data);
+            mapBusiness(businessLatitude, businessLongitude);
+        });
     }
     else {
         searchTerm = searchBox.value.trim();
@@ -92,37 +120,21 @@ searchButton.addEventListener('click', function(e) {
         searchResultsArea.innerHTML = '';
         document.getElementsByClassName('map')[0].style.display = 'none';
         searchResultsArea.textContent = 'Loading Data...';
-        var request = new XMLHttpRequest();
-        request.open('POST', '/search', true);
-        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        request.onload = function() {
-            if (request.status >= 200 && request.status < 400) {
-                data = JSON.parse(request.responseText);
-                if (data.businesses.length === 0) {
-                    searchResultsArea.innerHTML = '';
-                    searchResultsArea.textContent = 'Sorry, no results.';
-                    return;
-                }
-                else {
-                    searchResultsArea.innerHTML = makeBusiness();
-                    mapBusiness(addressForMap);
-                }
+        getSearch(function(data) {
+            if (data.businesses.length === 0) {
+                searchResultsArea.innerHTML = '';
+                searchResultsArea.textContent = 'Sorry, no results.';
+                return;
             }
             else {
-                searchResultsArea.textContent = 'Looks like there was a problem getting search results. Please try again.';
-                searchResultsArea.className += ' error';
+                searchResultsArea.innerHTML = makeBusiness(data);
+                mapBusiness(businessLatitude, businessLongitude);
             }
-        };
-        request.onerror = function() {
-            searchResultsArea.textContent = 'Looks like there was a problem getting search results. Please try again.';
-            searchResultsArea.className += ' error';
-        };
-
-        request.send('searchTerm=' + searchTerm + '&latitude=' + latitude + '&longitude=' + longitude);
+        });
     }
 });
 
-function makeBusiness() {
+function makeBusiness(data) {
     var randomIndex = Math.floor(Math.random() * (data.businesses.length - 0)) + 0;
     var randomBusiness = data.businesses[randomIndex];
     if ((randomBusiness.id.trim() === previousBusiness || randomBusiness.is_closed) && data.total !== 1) {
@@ -133,7 +145,8 @@ function makeBusiness() {
     }
     var name = randomBusiness.name.trim();
     var address = randomBusiness.location.display_address.join(',<br>').trim();
-    addressForMap = randomBusiness.location.address1 + ',' + randomBusiness.location.zip_code + ',' + randomBusiness.location.country;
+    businessLatitude = parseFloat(randomBusiness.coordinates.latitude);
+    businessLongitude = parseFloat(randomBusiness.coordinates.longitude);
     var phone = randomBusiness.display_phone.trim();
     previousBusiness = randomBusiness.id;
     var rating = randomBusiness.rating;
