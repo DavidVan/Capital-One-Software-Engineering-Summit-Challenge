@@ -26,7 +26,9 @@ router.post('/', function(req, res, next) {
         var searchPath = '/v3/businesses/search?' +
                             'term=' + encodeURIComponent(searchTerm) +
                             '&latitude=' + latitude +
-                            '&longitude=' + longitude;
+                            '&longitude=' + longitude +
+                            '&limit=50' +
+                            '&categories=food';
         var getData = function(callback) {
             var options = {
                 hostname: 'api.yelp.com',
