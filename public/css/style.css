@@ -186,6 +186,11 @@ footer>p>a:hover {
     color: green;
 }
 
+.priceError {
+    font-weight: bold;
+    color: red;
+}
+
 .businessText>img {
     width: 250px;
 }

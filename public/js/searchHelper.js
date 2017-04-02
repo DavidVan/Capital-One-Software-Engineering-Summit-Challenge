@@ -158,7 +158,8 @@ function makeBusiness(data) {
     }
     ratingImage += '.png';
     var numberOfReviews = randomBusiness.review_count;
-    var price = randomBusiness.price;
+    var price = typeof randomBusiness.price === 'undefined' ? 'Not Known' : randomBusiness.price;
+    var priceColor = typeof randomBusiness.price === 'undefined' ? 'priceError' : 'price'
     var source = '<div class="business">' +
                      '<div class="businessImage">' +
                          '<img src="' + randomBusiness.image_url + '"' + 'alt="' + randomBusiness.name + '">' +
@@ -171,7 +172,7 @@ function makeBusiness(data) {
                              '<img src="' + ratingImage + '" alt="' + rating + ' stars">' +
                              '<br>' +
                              '<p>Reviews: ' + numberOfReviews + '</p>' +
-                             '<p>Price: <span class="price">' + price + '</span></p>' +
+                             '<p>Price: <span class="' + priceColor + '">' + price + '</span></p>' +
                          '</div>' +
                      '</div>'
                  '</div>';
