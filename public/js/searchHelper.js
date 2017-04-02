@@ -97,6 +97,8 @@ var getSearch = function(callback) {
     request.send('searchTerm=' + searchTerm + '&latitude=' + latitude + '&longitude=' + longitude);
 };
 
+var savedData = '';
+
 searchButton.addEventListener('click', function(e) {
     e.preventDefault();
     searchResultsArea.className = 'searchResults';
@@ -108,10 +110,9 @@ searchButton.addEventListener('click', function(e) {
         return;
     }
     if (searchTerm !== '' && previousSearchTerm !== '' && searchTerm === searchBox.value.trim() && searchTerm === previousSearchTerm) {
-        getSearch(function(data) {
-            searchResultsArea.innerHTML = makeBusiness(data);
-            mapBusiness(businessLatitude, businessLongitude);
-        });
+        var recreatedData = JSON.parse(savedData);
+        searchResultsArea.innerHTML = makeBusiness(recreatedData);
+        mapBusiness(businessLatitude, businessLongitude);
     }
     else {
         searchTerm = searchBox.value.trim();
@@ -121,6 +122,7 @@ searchButton.addEventListener('click', function(e) {
         document.getElementsByClassName('map')[0].style.display = 'none';
         searchResultsArea.textContent = 'Loading Data...';
         getSearch(function(data) {
+            savedData = JSON.stringify(data);
             if (data.businesses.length === 0) {
                 searchResultsArea.innerHTML = '';
                 searchResultsArea.textContent = 'Sorry, no results.';
