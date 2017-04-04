@@ -159,23 +159,26 @@ function makeBusiness(data) {
     ratingImage += '.png';
     var numberOfReviews = randomBusiness.review_count;
     var price = typeof randomBusiness.price === 'undefined' ? 'Not Known' : randomBusiness.price;
-    var priceColor = typeof randomBusiness.price === 'undefined' ? 'priceError' : 'price'
-    var source = '<div class="business">' +
-                     '<div class="businessImage">' +
-                         '<img src="' + randomBusiness.image_url + '"' + 'alt="' + randomBusiness.name + '">' +
+    var priceColor = typeof randomBusiness.price === 'undefined' ? 'priceError' : 'price';
+    var yelpLink = randomBusiness.url;
+    var source = '<a href="' + yelpLink + '" id="yelpLink" target="_blank">' +
+                     '<div class="business">' +
+                         '<div class="businessImage">' +
+                             '<img src="' + randomBusiness.image_url + '"' + 'alt="' + randomBusiness.name + '">' +
+                             '</div>' +
+                             '<div class="businessText">' +
+                                 '<h1>' + name + '</h1>' +
+                                 '<p>' + address + '</p>' +
+                                 '<p>' + phone + '</p>' +
+                                 '<br>' +
+                                 '<img src="' + ratingImage + '" alt="' + rating + ' stars">' +
+                                 '<br>' +
+                                 '<p>Reviews: ' + numberOfReviews + '</p>' +
+                                 '<p>Price: <span class="' + priceColor + '">' + price + '</span></p>' +
+                             '</div>' +
                          '</div>' +
-                         '<div class="businessText">' +
-                             '<h1>' + name + '</h1>' +
-                             '<p>' + address + '</p>' +
-                             '<p>' + phone + '</p>' +
-                             '<br>' +
-                             '<img src="' + ratingImage + '" alt="' + rating + ' stars">' +
-                             '<br>' +
-                             '<p>Reviews: ' + numberOfReviews + '</p>' +
-                             '<p>Price: <span class="' + priceColor + '">' + price + '</span></p>' +
-                         '</div>' +
-                     '</div>'
-                 '</div>';
+                     '</div>' +
+                 '</a>';
     return source;
 }
 

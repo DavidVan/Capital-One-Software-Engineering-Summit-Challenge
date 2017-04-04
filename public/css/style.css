@@ -159,6 +159,10 @@ footer>p>a:hover {
     padding: 0;
 }
 
+#yelpLink {
+    color: black;
+}
+
 .business {
     display: flex;
     flex-direction: row;
