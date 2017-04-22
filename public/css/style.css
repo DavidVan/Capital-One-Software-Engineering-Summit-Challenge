@@ -57,6 +57,7 @@ nav>div>a:visited {
 }
 
 nav>div>a:hover {
+    color: white;
     background-color: #2196F3;
 }
 
