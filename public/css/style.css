@@ -102,6 +102,10 @@ footer>p>a:hover {
     text-align: center;
 }
 
+.removeSpacing {
+    font-size: 0;
+}
+
 .foodie {
     font-family: 'Lobster', cursive;
 }
