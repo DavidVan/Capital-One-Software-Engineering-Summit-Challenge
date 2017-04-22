@@ -14,7 +14,7 @@ if (navigator.geolocation) {
         if (error) {
             getRoughLocation();
         }
-    });
+    }, { timeout: 5000 });
 }
 else {
     getRoughLocation();
@@ -98,7 +98,7 @@ var getSearch = function(callback) {
 };
 
 var savedData = '';
-
+var counter = 0;
 searchButton.addEventListener('click', function(e) {
     e.preventDefault();
     searchResultsArea.className = 'searchResults';
@@ -106,7 +106,14 @@ searchButton.addEventListener('click', function(e) {
         return;
     }
     if (latitude === '' || longitude === '') {
-        console.log('Either it\'s taking a while to set coordinates (browser issue/implementation?), or there are no coordinates!')
+        if (counter >= 9) {
+            alert('Looks like there were problems getting your location. Are you using Microsoft Edge/Internet Explorer? If so, please allow geolocation for this site or use a different browser!');
+            counter = 0;
+        }
+        else {
+            console.log('Either it\'s taking a while to set coordinates (browser issue/implementation?), or there are no coordinates!');
+            counter++;
+        }
         return;
     }
     if (searchTerm !== '' && previousSearchTerm !== '' && searchTerm === searchBox.value.trim() && searchTerm === previousSearchTerm) {
